@@ -1,0 +1,35 @@
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aqua;
+  width: 100%;
+  height: 100vh;
+
+
+  .white_bgr{
+    background-color: white;
+    width: 70%;
+    height: 80vh;
+    border-radius: 14px;
+    overflow-x: hidden;
+
+
+    &::-webkit-scrollbar{
+      width: 20px;
+    }
+
+    &::-webkit-scrollbar-track{
+      background: transparent;
+      
+    }
+
+    &::-webkit-scrollbar-thumb{
+      background-color: aqua;
+      border-radius: 20px;
+      background-clip: content-box;
+      border: 6px solid transparent;
+    }
+
+  }
+}
