@@ -6,6 +6,8 @@ import ProductCard from '../ProductCart'
 import { Products } from '../../config'
 import Pagination from '../ProductCart/pagination/Pagination'
 import { Link } from 'react-router-dom'
+import Loading from '../Loading'
+import Anchor from '../Anchor/Anchor'
 // import { useParams } from 'react-router-dom'
 
 
@@ -17,7 +19,7 @@ const Main = () => {
   const [input , setInput] = React.useState('')
   const [dropDown , setDropDown] = React.useState(null)
 
-  console.log(input);
+  console.log(base);
 
 
   const [page, setPage] = React.useState(1)
@@ -27,7 +29,7 @@ const Main = () => {
 
   
   useEffect(() => {
-    const data = base && base.filter(item => item.title.toLowerCase().includes(input.toLowerCase()))
+    const data = base && base.filter(item => console.log(item))
     setPage(1)
     setDropDown(data)
 
@@ -58,7 +60,7 @@ const Main = () => {
   
 
   // console.log(base);
-
+  if(!base) return <div style={{display:'flex' , justifyContent:'center'}}><Loading /></div>
 
   return (
     <>
@@ -132,7 +134,7 @@ const Main = () => {
       </div>
 
 
-      <div>
+      {/* <div>
         {
           input === '' ?
           <div className={cls.next_prev_btn_data}>
@@ -140,7 +142,7 @@ const Main = () => {
           </div> :
           ''
         }
-      </div>
+      </div> */}
 
 
 
@@ -170,7 +172,9 @@ const Main = () => {
 
 
 
-
+      <div>
+        <Anchor />
+      </div>
 
 
         

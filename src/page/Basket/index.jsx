@@ -5,6 +5,7 @@ import { AiOutlineMinus , AiOutlinePlus } from 'react-icons/ai'
 import { BiX } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
+import { BASE_URL } from '../../config/api';
 
 const Basket = () => {
   const [ getBaskets , setGetBaskets ] = useState('') 
@@ -83,11 +84,12 @@ if(!getBaskets) return <div style={{display:'flex' , justifyContent:'center'}}><
 
             totalCartPrice += item[0].price * 1
 
+            // console.log(item[0].id);
 
             return(
               <div className={cls.card} key={index}>
-                <div className={cls.image_data}>
-                  <img src={item[0].image} alt="" />
+                <div onClick={() => navigate(`/product/${item[0].id}`)} className={cls.image_data}>
+                  <img src={`${BASE_URL}${item[0].image}`} alt="" />
                 </div>
                 <div className={cls.pls_mns_btn}>
                   <AiOutlineMinus />

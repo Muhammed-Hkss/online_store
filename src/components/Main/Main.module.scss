@@ -41,10 +41,18 @@
 
 
 .wrapper_data{
+  position: relative;
+  top: 7rem;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 7rem;
   padding: 0 20px;
+}
+
+.next_prev_btn_data{
+  position: relative;
+  top: 7rem;
 }
 
 

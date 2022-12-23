@@ -1,26 +1,12 @@
-import { useState, useRef } from 'react';
-import ReactImageMagnify from 'react-image-magnify';
-import cls from './Test.module.scss'
-import './Test.scss'  
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import './TextItem.scss'
 
+const TextItem = () => {
+  const navigate = useNavigate()
 
-
-function Test() {
-
-
-
-    return (
-      // <div className={cls.card}>
-      //   <div className={cls.imgBox}>
-      //     <img src="https://images.unsplash.com/photo-1509221969444-c160deb7edb5?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=8f6e01a936da20b1e24b431089f27130" alt=""/>
-      //   </div>
-      //   <div className={cls.details}>
-      //     <h2>lorem ipsum dolor</h2>
-      //     <p>dfasjl lk;jds jl;sdaf hjdsfjdsa ghfu j asdfuju ,klpds pe posd ur dhqeryt eyop  ads  oep pfghdm,ntic jrpvcnj dfh eklfnsk r dieu pw ehdg swuewq whr ekkshq pfb v,m ertuk b eu e kwre i t   q m ei er wr efg efbdfeoi  cbxgkr ,rikugh dsk bvckjgry kfbd,vbkugsbn,sdvksghksvb us y bvkur iur jcxgiur kuryt rktry ktrut dsbvskt hrsut strksbfskfgs </p>
-      //   </div>
-      // </div>
-
-      <>
+  return (
+    <>
       <div className='container'>
         <div className="flip-card-container" 
         // style="--hue: 220"
@@ -49,7 +35,7 @@ function Test() {
                 <img className='image' src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/d7668d10218199.560e14ca9736a.jpg " />
               </div>
 
-              <button className='book_btn'>More</button>
+              <button className='book_btn' onClick={() => navigate('/')}>More</button>
 
               <div className="design-container">
                 <span className="design design--1"></span>
@@ -66,21 +52,8 @@ function Test() {
           </div>
         </div>
       </div>
-        
-      </>
-
-      // <>
-      //   <div className={cls.test_container}>
-      //     <div className={cls.glassBox}>
-      //       <div className={cls.glassBox__imgBox}>
-      //         <img src="https://cryxxen.pythonanywhere.com/media/product_images/image-aNGJoh7Ps-transformed.png" alt="" />
-      //         <h3 className={cls.glassBox__title}>Golden Shoe</h3>
-      //       </div>
-      //       <div className={cls.glassBox__content}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae sunt veniam adipisci fugit qui quaerat!</div>
-      //     </div>
-      //   </div>
-      // </>
-    );
+    </>
+  )
 }
 
-export default Test;
+export default TextItem
