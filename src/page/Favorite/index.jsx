@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DelFavorites, GetFavorites } from '../../config'
+import Test from '../../Test'
 import cls from './Favorite.module.scss'
 
 
@@ -21,7 +22,12 @@ const Favorite = () => {
   }, [])
   
   return (
-      
+
+    <>
+      <div>
+        <Test />
+      </div>
+
       <div className={cls.container}>
         
         <div className={cls.white_bgr}>
@@ -89,6 +95,8 @@ const Favorite = () => {
           </div>
         </div>
       </div>
+    </>
+      
   )
 }
 

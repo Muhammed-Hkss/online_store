@@ -4,6 +4,7 @@ import AboutVideo from '../../video/videoplayback.mp4'
 import Navbar from '../../components/Navbar'
 import { motion } from 'framer-motion'
 import TextItem from './TextItem'
+import Test from '../../Test'
 
 
 
@@ -12,9 +13,15 @@ const About = () => {
   return (
 
     <>
-      <div>
+      {/* <div>
         <Navbar />  
+      </div> */}
+
+      <div>
+        <Test />
       </div>
+
+
       
       <motion.div className={cls.container}>
         <div className={cls.video_data}>
@@ -77,9 +84,6 @@ const About = () => {
         </div>
       </motion.div>
 
-      <div>
-        
-      </div>
     </>
   )
 }

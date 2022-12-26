@@ -1,85 +1,90 @@
-import { useState, useRef } from 'react';
-import ReactImageMagnify from 'react-image-magnify';
+
 import cls from './Test.module.scss'
-import './Test.scss'  
+import {IoLogoSass} from 'react-icons/io'
+import {AiOutlineMenu} from 'react-icons/ai'
+import {BiLogOut} from 'react-icons/bi'
+import {BsSearch} from 'react-icons/bs'
+import { useState } from 'react'
+import { NavbarList } from '../utils/Navbar'
+import { useNavigate } from 'react-router-dom'
+// import './Test.scss'  
 
 
 
 function Test() {
+  const [isDropdown , setIsDropdown] = useState(false)
+  const AccessToken = localStorage.getItem('accessToken')
+  const navigate = useNavigate()
+
+
 
 
 
     return (
-      // <div className={cls.card}>
-      //   <div className={cls.imgBox}>
-      //     <img src="https://images.unsplash.com/photo-1509221969444-c160deb7edb5?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=8f6e01a936da20b1e24b431089f27130" alt=""/>
-      //   </div>
-      //   <div className={cls.details}>
-      //     <h2>lorem ipsum dolor</h2>
-      //     <p>dfasjl lk;jds jl;sdaf hjdsfjdsa ghfu j asdfuju ,klpds pe posd ur dhqeryt eyop  ads  oep pfghdm,ntic jrpvcnj dfh eklfnsk r dieu pw ehdg swuewq whr ekkshq pfb v,m ertuk b eu e kwre i t   q m ei er wr efg efbdfeoi  cbxgkr ,rikugh dsk bvckjgry kfbd,vbkugsbn,sdvksghksvb us y bvkur iur jcxgiur kuryt rktry ktrut dsbvskt hrsut strksbfskfgs </p>
-      //   </div>
-      // </div>
-
       <>
-      <div className='container'>
-        <div className="flip-card-container" 
-        // style="--hue: 220"
-        >
-          <div className="flip-card">
-
-            <div className="card-front">
-              <div className='figure'>
-                <div className="img-bg"></div>
-                <img className='image' src="https://gamerwall.pro/uploads/posts/2022-05/1652130641_43-gamerwall-pro-p-ogromnie-zdaniya-budushchego-oboi-krasivo-52.jpg" />
-                <div className='figcaption'>Favotite</div>
+        <div className={cls.container}>
+          <div className={isDropdown ? `${cls.sidebare} ${cls.active}` : cls.sidebare} >
+            <div className={cls.logo_container}>
+              <div className={cls.logo}>
+                <i><IoLogoSass /></i>
+                <div className={cls.logo_name}>Logo</div>
               </div>
 
-              <ul className='ul_list'>
-                <li className='list_li'>text</li>
-                <li className='list_li'>text</li>
-                <li className='list_li'>text</li>
-                <li className='list_li'>text</li>
-                <li className='list_li'>text</li>
-              </ul>
+
+              <i 
+                onClick={() => setIsDropdown(prev => !prev)}
+              >
+                <AiOutlineMenu id={cls.btn} />
+              </i>
+              
+
+
             </div>
-
-            <div className="card-back">
-              <div className='figure'>
-                <div className="img-bg"></div>
-                <img className='image' src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/d7668d10218199.560e14ca9736a.jpg " />
-              </div>
-
-              <button className='book_btn'>More</button>
-
-              <div className="design-container">
-                <span className="design design--1"></span>
-                <span className="design design--2"></span>
-                <span className="design design--3"></span>
-                <span className="design design--4"></span>
-                <span className="design design--5"></span>
-                <span className="design design--6"></span>
-                <span className="design design--7"></span>
-                <span className="design design--8"></span>
-              </div>
+            <ul className={cls.nav_list}>
+                <li>
+                  <i className={cls.bx_search}><BsSearch /></i>
+                  <input type="text" placeholder='Search' />
+                  <span className={cls.tooltip}>Search</span>
+                </li>
+                {
+                  NavbarList.map(item => <li key={item.id}>
+                    <a href={item.path}>
+                      <i>{item.logo}</i>
+                      <span className={cls.links_name}>{item.title}</span>
+                    </a>
+                    <span className={cls.tooltip}>{item.span}</span>
+                  </li>
+                  )
+                }
+            </ul>
+            <div className={cls.profile_content}>
+                <div className={cls.profile}>
+                  <div className={cls.profile_detals}>
+                    <img src="https://www.hdcarwallpapers.com/walls/2012_lexus_lf_lc_blue_concept-wide.jpg" alt="" />
+                    <div className={cls.name_job}>
+                      <p className={cls.name}>Prem Shahi</p>
+                      <p className={cls.job}>web Designer</p>
+                    </div>
+                  </div>
+                  <a href="/auth/login" className={cls.log}>
+                    <BiLogOut  id={cls.log_out}/>
+                    {/* {
+                      !AccessToken ? 
+                      <button onClick={() => navigate('/auth/login')} className={cls.register_btn}>
+                        войти
+                      </button> :
+                      <BiLogOut onClick={() => navigate('/auth/login')} className={cls.register_btn} />
+                    } */}
+                  </a>
+                </div>
             </div>
-
           </div>
         </div>
-      </div>
-        
-      </>
 
-      // <>
-      //   <div className={cls.test_container}>
-      //     <div className={cls.glassBox}>
-      //       <div className={cls.glassBox__imgBox}>
-      //         <img src="https://cryxxen.pythonanywhere.com/media/product_images/image-aNGJoh7Ps-transformed.png" alt="" />
-      //         <h3 className={cls.glassBox__title}>Golden Shoe</h3>
-      //       </div>
-      //       <div className={cls.glassBox__content}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae sunt veniam adipisci fugit qui quaerat!</div>
-      //     </div>
-      //   </div>
-      // </>
+        {/* <div className={cls.home_content}>
+          <div className={cls.text}>Home Content</div>
+        </div>         */}
+      </>
     );
 }
 

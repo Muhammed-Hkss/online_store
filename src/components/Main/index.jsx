@@ -3,11 +3,12 @@ import Navbar from '../Navbar'
 import Video from '../../video/store_video1.mp4'
 import cls from './Main.module.scss'
 import ProductCard from '../ProductCart'
-import { Products } from '../../config'
+import { Categories, Products } from '../../config'
 import Pagination from '../ProductCart/pagination/Pagination'
 import { Link } from 'react-router-dom'
 import Loading from '../Loading'
 import Anchor from '../Anchor/Anchor'
+import Test from '../../Test'
 // import { useParams } from 'react-router-dom'
 
 
@@ -19,7 +20,11 @@ const Main = () => {
   const [input , setInput] = React.useState('')
   const [dropDown , setDropDown] = React.useState(null)
 
-  console.log(base);
+
+  const [categories , setCategories] = React.useState(null)
+
+
+  // console.log(base);
 
 
   const [page, setPage] = React.useState(1)
@@ -41,6 +46,12 @@ const Main = () => {
       setBase(r.data)
     })
     
+  }, [])
+
+  useEffect(() => {
+    Categories().then(r => {
+      setCategories(r.data)
+    })
   }, [])
 
 
@@ -65,7 +76,9 @@ const Main = () => {
   return (
     <>
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
+
+        <Test />
       </div>
 
       <div className={cls.main_container}>
@@ -89,12 +102,66 @@ const Main = () => {
         />
       </div>
 
-      {/* <ProductCard products={products} base={base} TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage}/> */}
-      {/* {
-          base && base.map(item => (
-            <ProductCard key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
+
+        
+      {/* <div style={{display:'flex'}}>
+        {
+          categories && categories.map(item => (
+            <div key={item.id}>
+              <button>
+                {item.title}
+              </button>
+            </div>
           ))
-        } */}
+        }
+      </div> */}
+
+
+
+      {/* <select className={cls.filter_select} onChange={(e => filterResult(e.target.value))}>
+        <option>Language</option>
+        <option>All</option>
+        {uniqueEmployees && uniqueEmployees.map(item => (
+
+        item.language === null ? '' : 
+        <option
+          key={item.id} 
+          className={cls.filter_button}
+          onClick={() => filterResult(`${item.language}`)} 
+        >
+          {item.language}
+        </option>
+        ))}
+      </select> */}
+
+
+
+      {/* <div>
+        {
+          categories && categories.map(item => {
+            console.log(item.parent === null ? '11' : '');
+
+            return(
+              <>
+                
+                {
+                  item.parent === null ? 
+                  <select key={item.id}>
+                   
+                      {
+                        item.parent === null ? 
+                        '' :  
+                        <option>{item.title}</option>
+                      }
+                  </select> : ''
+                }
+              </>
+            )
+          })
+        }
+      </div> */}
+
+
       
       <div className={cls.wrapper_data}>
 
@@ -134,7 +201,7 @@ const Main = () => {
       </div>
 
 
-      {/* <div>
+      <div>
         {
           input === '' ?
           <div className={cls.next_prev_btn_data}>
@@ -142,7 +209,7 @@ const Main = () => {
           </div> :
           ''
         }
-      </div> */}
+      </div>
 
 
 

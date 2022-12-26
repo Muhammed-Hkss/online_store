@@ -77,6 +77,7 @@ const MoreItem = ({item}) => {
   const to__favorite = () => {
     if(accessToken){
       PostFavorites(accessToken, {product: item.id, is_active: item.is_active})
+      // PostFavorites(accessToken, {product: item.id, is_active: item.is_active})
       setRefresh('post')
     }else{
       alert('Вы не авторизованы!')

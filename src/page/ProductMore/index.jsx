@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { ProductsMore } from '../../config'
+import Test from '../../Test';
 // import cls from './ProductMore.module.scss'
 import MoreItem from './MoreItem';
 
@@ -22,6 +23,10 @@ const ProductMore = () => {
 
   return (
     <>
+      <div>
+        <Test />
+      </div>
+
       <div>
         <MoreItem item={base}/>
       </div>

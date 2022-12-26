@@ -1,16 +1,11 @@
 
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Categories, GetFavorites, PostBaskets, PostFavorites, Products } from '../../config'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import {  PostBaskets, PostFavorites } from '../../config'
 import useAlert from '../../hooks/useAlert'
-import Loading from '../Loading'
-import Pagination from './pagination/Pagination'
 import cls from './ProductCard.module.scss'
-import { FiHeart } from 'react-icons/fi'
 
 const ProductCard = ({products , item }) => {
-  // const [products , setProducts] = useState('')
-	// const [base, setBase] = React.useState(products)
   
   const { actions } = useAlert()
   const navigate = useNavigate()
