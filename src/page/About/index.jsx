@@ -78,7 +78,7 @@ const About = () => {
             </div> */}
 
             <div className={cls.white_3_image_data}>
-             <TextItem />
+             {/* <TextItem /> */}
             </div>
           </div>
         </div>

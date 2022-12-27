@@ -1,13 +1,11 @@
-
 import cls from './Test.module.scss'
 import {IoLogoSass} from 'react-icons/io'
-import {AiOutlineMenu} from 'react-icons/ai'
-import {BiLogOut} from 'react-icons/bi'
-import {BsSearch} from 'react-icons/bs'
-import { useState } from 'react'
+import {AiOutlineMenu , AiOutlineLogin} from 'react-icons/ai'
+import {BiLogOutCircle} from 'react-icons/bi'
+import { useEffect, useState } from 'react'
 import { NavbarList } from '../utils/Navbar'
 import { useNavigate } from 'react-router-dom'
-// import './Test.scss'  
+import { GetUser } from '../config'
 
 
 
@@ -15,9 +13,24 @@ function Test() {
   const [isDropdown , setIsDropdown] = useState(false)
   const AccessToken = localStorage.getItem('accessToken')
   const navigate = useNavigate()
+  const [users , setUser] = useState(null)
+
+  // console.log(users);
 
 
 
+
+  useEffect(() => {
+    GetUser(localStorage.getItem('accessToken')).then(r => {
+      setUser(r.data);
+    })
+  }, [])
+
+  const logoutHandler =  (e) => {
+		e.preventDefault()
+		localStorage.clear()
+		window.location.reload()
+	}
 
 
     return (
@@ -41,11 +54,11 @@ function Test() {
 
             </div>
             <ul className={cls.nav_list}>
-                <li>
+                {/* <li>
                   <i className={cls.bx_search}><BsSearch /></i>
                   <input type="text" placeholder='Search' />
                   <span className={cls.tooltip}>Search</span>
-                </li>
+                </li> */}
                 {
                   NavbarList.map(item => <li key={item.id}>
                     <a href={item.path}>
@@ -60,14 +73,19 @@ function Test() {
             <div className={cls.profile_content}>
                 <div className={cls.profile}>
                   <div className={cls.profile_detals}>
-                    <img src="https://www.hdcarwallpapers.com/walls/2012_lexus_lf_lc_blue_concept-wide.jpg" alt="" />
+                    {/* <img src="https://www.hdcarwallpapers.com/walls/2012_lexus_lf_lc_blue_concept-wide.jpg" alt="" /> */}
+                    {
+                      users?.avatarka === null ? <img src='https://pbs.twimg.com/media/FbkmozNXgAMgVRX?format=jpg&name=large' alt="null" /> : <img src={users?.avatarka} alt="null" />
+                    }
                     <div className={cls.name_job}>
-                      <p className={cls.name}>Prem Shahi</p>
-                      <p className={cls.job}>web Designer</p>
+                      <p className={cls.name}>{users?.username}</p>
+                      <p className={cls.job}>{users?.phone_number}</p>
                     </div>
                   </div>
-                  <a href="/auth/login" className={cls.log}>
+                  {/* <a href="/auth/login" className={cls.log}>
                     <BiLogOut  id={cls.log_out}/>
+                    
+                  </a> */}
                     {/* {
                       !AccessToken ? 
                       <button onClick={() => navigate('/auth/login')} className={cls.register_btn}>
@@ -75,7 +93,18 @@ function Test() {
                       </button> :
                       <BiLogOut onClick={() => navigate('/auth/login')} className={cls.register_btn} />
                     } */}
-                  </a>
+
+                  {
+                    !AccessToken ?
+
+                    <a href="/auth/login" className={cls.log}>
+                      <AiOutlineLogin id={cls.log_out}/>
+                    </a>:
+
+                    <a href="/auth/login" className={cls.log}>
+                      <BiLogOutCircle onClick={logoutHandler}  id={cls.log_out}/>
+                    </a> 
+                  }
                 </div>
             </div>
           </div>

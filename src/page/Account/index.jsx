@@ -109,7 +109,7 @@ const Account = () => {
             <p>{users?.phone_number}</p>
             <p>{users?.about}</p>
             <p>{users?.email}</p>
-            <div style={{display:'flex' , gap:'20px' , justifyContent:'center'}}>
+            <div className={cls.bask_favor_data} >
               <p>basket: {users?.basket_owner.length}</p>
               <p>favorite: {users?.user_favorite.length}</p>
             </div>

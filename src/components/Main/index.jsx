@@ -16,36 +16,29 @@ import Test from '../../Test'
 
 const Main = () => {
   const [products , setProducts] = useState('')
-	const [base, setBase] = React.useState(products)
-  const [input , setInput] = React.useState('')
-  const [dropDown , setDropDown] = React.useState(null)
+	const [base, setBase] = useState(products)
+
+  const [input , setInput] = useState('')
+  // const [dropDown , setDropDown] = useState(null)
 
 
-  const [categories , setCategories] = React.useState(null)
-
-
-  // console.log(base);
-
-
-  const [page, setPage] = React.useState(1)
+  const [categories , setCategories] = useState(null)
+  const [page, setPage] = useState(1)
   const PAGE_SIZE = 6
 	const TOTAL_PAGE = Math.ceil(products?.length / PAGE_SIZE)
 
+  // const filteredProduct = products && products.filter(item => item.category === 1 && item.title.toLowerCase().includes(input.toLowerCase()) ? item : null)
+  const filteredProduct = base && base.filter(item =>item.title.toLowerCase().includes(input.toLowerCase()) ? item : null)
 
+  // console.log(products);
+  // console.log(filteredProduct);
   
   useEffect(() => {
-    const data = base && base.filter(item => console.log(item))
-    setPage(1)
-    setDropDown(data)
-
-
+    // setPage(1)
     Products().then(r => {
       setProducts(r.data)
-
-
       setBase(r.data)
     })
-    
   }, [])
 
   useEffect(() => {
@@ -70,7 +63,58 @@ const Main = () => {
   }
   
 
-  // console.log(base);
+
+
+
+
+
+
+
+
+
+
+
+  // const num = Number('2020');
+  // console.log(num);
+
+
+
+
+
+
+  const [filtredResuld , setFiltredResuld] = useState('')
+
+
+
+  const filterResultt = (catItem) => {
+    if(catItem === 'All') {
+      setFiltredResuld(base)
+    } else {
+      const result =  products && products.filter((curData) => {
+        // console.log(catItem);
+        // console.log(curData.category === Number(catItem));
+        return curData.category === Number(catItem)
+      })
+      setFiltredResuld(result)
+    }
+  }
+
+
+console.log(filtredResuld);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   if(!base) return <div style={{display:'flex' , justifyContent:'center'}}><Loading /></div>
 
   return (
@@ -118,48 +162,50 @@ const Main = () => {
 
 
 
-      {/* <select className={cls.filter_select} onChange={(e => filterResult(e.target.value))}>
-        <option>Language</option>
-        <option>All</option>
-        {uniqueEmployees && uniqueEmployees.map(item => (
-
-        item.language === null ? '' : 
-        <option
-          key={item.id} 
-          className={cls.filter_button}
-          onClick={() => filterResult(`${item.language}`)} 
-        >
-          {item.language}
-        </option>
-        ))}
-      </select> */}
-
-
-
-      {/* <div>
+      <div style={{display:'flex' , justifyContent:'center'}}>
         {
-          categories && categories.map(item => {
-            console.log(item.parent === null ? '11' : '');
+          categories?.map(item => {
+            // console.log(item);
+            // id: 9, title: 'Женская',
 
             return(
               <>
-                
-                {
-                  item.parent === null ? 
-                  <select key={item.id}>
-                   
-                      {
-                        item.parent === null ? 
-                        '' :  
-                        <option>{item.title}</option>
-                      }
-                  </select> : ''
-                }
+                <div key={item.id}>
+                  {
+                    item.parent === null ? 
+                    '' : 
+                    <div>
+                      <button 
+                        onClick={() => filterResultt(`${item.id}`)} 
+                        
+                        // onClick={() => removePoducts(`${item.id}`)}
+                      >
+                        {item.title}
+                      </button>
+                    </div>
+                  }
+                </div>
               </>
             )
           })
         }
-      </div> */}
+        {/* <select className={cls.filter_select} onChange={(e => filterResultt(e.target.value))}>
+          <option>Language</option>
+          <option>All</option>
+          {categories && categories.map(item => (
+
+          item.parent === null ?  '' : 
+          <option
+            key={item.id} 
+            // className={cls.filter_button}
+            onClick={() => filterResultt(`${item.id}`)} 
+          >
+            {item.id}
+          </option>
+          ))}
+        </select> */}
+      </div>
+
 
 
       
@@ -167,36 +213,31 @@ const Main = () => {
 
         
           {
-            input === '' ? 
-            base && base.map(item =>(
+
+            input && filtredResuld === '' ? 
+            base && base.map(item =>{
+              // console.log(item);
+
+              return(
+                <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
+              )
+            }) :
+
+            filtredResuld === '' ?
+            filteredProduct && filteredProduct.map(item => (
               <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
             )) :
-            dropDown && dropDown.map(item => (
-              <div key={item.id} className={cls.wrapper}>
-                <div className={cls.product_img}>
-                  <img src={item.image} height="420" width="327"/>
-                </div>
-                <div className={cls.product_info}>
-                  <div className={cls.product_text}>
-                    <h1>{item.title}</h1>
-                    <h2>{item.title}</h2>
 
-                    <div className={cls.link_more_data}>
-                      <Link className={cls.link_more} to={`/product/${item.id}`}>More</Link> 
-                    </div>
-                  </div>
-                  <div className={cls.product_price_btn}>
-                    <p><span>{item.price}</span>$</p>
-                    <button 
-                      // onClick={() =>  handlePostBaskets(item.id)}
-                      type="button"
-                    >buy now</button>
-                  </div>
-                </div>
-              </div>
+            filtredResuld && filtredResuld.map(item => (
+              <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
             ))
 
           }
+          {/* {
+            filtredResuld && filtredResuld.map(item => (
+              <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
+            ))
+          } */}
         
       </div>
 

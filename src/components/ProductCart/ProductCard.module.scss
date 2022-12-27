@@ -373,26 +373,13 @@
 
 @mixin flex-center { display: flex; justify-content: center; align-items: center; }
 
-/*
- * Preparing stage
-*/
 
-// .test_container{
-//   padding: 0;
-//   margin: 0; 
-//   height: 100%;
-//   position: relative; 
-//   @include flex-center;
-//   background-color: #0093E9;
-//   background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
-// }
-/*
- * Start
-*/
 .glassBox {
   &, & * { box-sizing: border-box; transition: 400ms; }
-  margin: 40px;
-  width: 100%;
+  // margin: 20px;
+  position: relative;
+  left: 25px;
+  width: 90%;
   height: 400px;
   max-width: 300px;
   border-radius: 5px;
@@ -407,6 +394,7 @@
   @include flex-center;
   flex-direction: column;
   cursor: pointer ;
+  
   &__imgBox {
     img {
       display: block;
@@ -436,23 +424,38 @@
     transform: translateY(-50px);
   }
   &:hover &__imgBox img {
-    transform: translate(-20px, -40px) rotate(-15deg) scale(1.2);
+    transform: translate(-20px, -40px) rotate(-15deg) scale(1.1);
   }
   &:hover &__title {
-    //margin-top: 40px;
+    // margin-top: 40px;
     // opacity: 0.5;
   }
 
   .glassBox__title2{
+    // text-align: center;
+    // position: absolute;
+    // top: 4rem;
+    // left: 4rem;
+    // opacity: 0;
+    // border: 1px solid gray;
+    // background-color: white;
+    // border-radius: 9px;
+    // width: 50%;
+
     text-align: center;
     position: absolute;
     top: 4rem;
     left: 4rem;
-    opacity: 0;
-    border: 1px solid gray;
-    background-color: white;
-    border-radius: 9px;
-    width: 50%;
+    opacity: 0; 
+    margin-top: 10px;
+    padding: 0.5rem 10px;
+    width: 64%;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.718);
+    box-shadow:  0 0 10px black;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
   }
   &:hover &__title2 {
     opacity: 1;

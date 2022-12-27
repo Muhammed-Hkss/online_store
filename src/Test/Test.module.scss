@@ -280,3 +280,21 @@
     }
   }
 }
+
+
+@media(max-width:650px){
+  .container{
+    .sidebare{
+      width: 48px;
+
+      &.active {
+        width: 200px;
+      }
+
+      ul{
+        position: relative;
+        right: 15px;
+      }
+    }
+  }
+}

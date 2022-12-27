@@ -55,6 +55,12 @@ const Basket = () => {
   const delete_basket = (id) => {
     if(accessToken){  
       DelBaskets(accessToken, id)
+      .then(() => {
+        GetBaskets(accessToken)
+        .then(r => {
+          setGetBaskets(r.data)
+        })  
+      })
       // setRefresh('refreshing!')w
     }else{
       alert('Вы не авторизованы!')
@@ -87,7 +93,7 @@ if(!getBaskets) return <div style={{display:'flex' , justifyContent:'center'}}><
           {
             getBaskets.length === 0 ?
             
-            <button onClick={() => navigate('/')}>Перейти на главную</button> : 
+            <button className={cls.no_basket_btn} onClick={() => navigate('/')}>Перейти на главную</button> : 
             
             getBaskets?.map((item , index) => {
               // console.log(item);
@@ -108,13 +114,14 @@ if(!getBaskets) return <div style={{display:'flex' , justifyContent:'center'}}><
                     <img src={`${BASE_URL}${item.products_data[0].image}`} alt="" />
                   </div>
                   <div className={cls.pls_mns_btn}>
-                    <AiOutlineMinus />
+                    <AiOutlineMinus style={{cursor:'pointer'}} />
                     <p>1</p>
-                    <AiOutlinePlus />
+                    <AiOutlinePlus style={{cursor:'pointer'}}/>
                   </div>
                   <p>{item.products_data[0].title}</p>
                   <p>{item.products_data[0].price}$</p>
                   <BiX 
+                    style={{cursor:'pointer'}}
                     onClick={() => delete_basket(JSON.stringify(item.id))}
                   />
                 </div>

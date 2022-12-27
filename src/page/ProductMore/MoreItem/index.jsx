@@ -1,33 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import cls from './MoreItem.module.scss'
-import { Baskets, DelFavorites, GetFavorites, PostBaskets, PostFavorites, ProductsMore } from '../../../config'
+import { Baskets, DelFavorites, GetBaskets, GetFavorites, PostBaskets, PostFavorites, ProductsMore } from '../../../config'
 import ReactImageMagnify from 'react-image-magnify';
 import { AiFillHeart , AiOutlineHeart } from 'react-icons/ai'
 import Loading from '../../../components/Loading';
 
 
 const MoreItem = ({item}) => {
-  const [moreData , setMoreData] = useState(null)
+  // const [moreData , setMoreData] = useState(null)
   const [ saveBase, setSaveBase ] = useState(null)
   const [ count, setCount ] = useState(1)
   const [ have, setHave ] = useState(false)
+  // const [ getBasket, setGetBasket ] = useState(false)
   const accessToken = localStorage.getItem('accessToken')
   const navigate = useNavigate()
 
   const [ refresh, setRefresh ] = React.useState('')
 
 
-
-  // useEffect(() => { 
-
-  //   GetFavorites(accessToken)
-  //   .then(res => {
-  //     setSaveBase(res.data)
-
-  //     res.data?.find(val => val.product === item?.id ? setHave(val) : '')
-  //   })
-  // } , [])
 
 
 
@@ -36,37 +27,46 @@ const MoreItem = ({item}) => {
     GetFavorites(accessToken)
     .then(res => {
       setSaveBase(res.data)
-      // res.data?.find(val => val.product === item?.id ? setHave(true) : setHave(false))
       res.data?.find(val => val.product === item?.id ? setHave(val) : '')
     })
     setTimeout(() => {
       setRefresh('Helloo')
     }, 1000)
-    }, [refresh]) 
+  }, [refresh]) 
+
+
+  // useEffect(() => {
+  //   GetBaskets(accessToken).then(r => {
+  //     setGetBasket(r.data)
+  //   })
+  // } , [])
 
 
 
-  //  const to__favorite = () => {
-  //   if(accessToken){
-  //     PostFavorites(accessToken, {product: moreData?.id, is_active: moreData?.is_active})
-  //   }else{
-  //     alert('Вы не авторизованы!')
-  //     navigate('/auth/register')
-  //   }
-  // }   
-  // const delete__favorite = (id) => {
-  //   if(accessToken){
-  //     DelFavorites(accessToken, id)
-  //   }else{
-  //     alert('Вы не авторизованы!')
-  //     navigate('/auth/register')
-  //   }
-  // } 
 
+
+
+
+
+
+
+
+
+
+
+
+ 
+  const [ getBaskets , setGetBaskets ] = useState('') 
 
   const to__basket = () => {
     if(accessToken){
       PostBaskets(accessToken, {products: [JSON.stringify(item.id)], is_active: item.is_active})
+      .then(() => {
+        GetBaskets(accessToken)
+        .then(r => {
+          setGetBaskets(r.data)
+        })  
+      })
       setRefresh('post!')
     }else{
       alert('Вы не авторизованы')
@@ -74,10 +74,28 @@ const MoreItem = ({item}) => {
     }
   }
 
+  // console.log(getBaskets);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   const to__favorite = () => {
     if(accessToken){
       PostFavorites(accessToken, {product: item.id, is_active: item.is_active})
-      // PostFavorites(accessToken, {product: item.id, is_active: item.is_active})
       setRefresh('post')
     }else{
       alert('Вы не авторизованы!')
@@ -101,6 +119,7 @@ const MoreItem = ({item}) => {
 
 
 
+  // console.log(getBasket);
 
 
   if(!item) return <div style={{display:'flex' , justifyContent:'center'}}><Loading /></div>
@@ -179,12 +198,32 @@ const MoreItem = ({item}) => {
 
 
       <div className={cls.to__basket_data}>
-        <button 
+
+        {/* <button 
           className={cls.to__basket}
           onClick={() => to__basket()}
         >
           В корзину
-        </button>
+        </button> */}
+
+        {
+            // console.log(item?.id),
+            // console.log(basket),
+            // item?.id === basket.products_data[0].id ? 
+            getBaskets.length === 0 ?
+            <button
+              className={cls.to__basket}
+              onClick={() => to__basket()}
+            >
+              В корзину
+            </button>: 
+            <button 
+              className={cls.del__basket} 
+              onClick={() => navigate('/basket')}
+            >
+              Перейти в корзину
+            </button> 
+        }
       </div>
     </div>
   )

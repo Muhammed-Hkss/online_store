@@ -2,6 +2,9 @@
   display: grid;
   justify-content: space-around;
   align-items: center;
+  // margin: 60px;
+  position: absolute;
+  left: 48px;
   
   .image_data{
     text-align: center;
@@ -100,8 +103,22 @@
       width: 64%;
       border-radius: 6px;
       background: #5390e0;
-      color: whitesmoke;
+      color: #5390e0;
       border: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .del__basket{
+      margin-top: 10px;
+      padding: 1rem 10px;
+      width: 64%;
+      border-radius: 6px;
+      background: none;
+      border: 2px solid #5390e0;
+      color: #5390e0;
+      // border: none;
       font-weight: 600;
       font-size: 14px;
       cursor: pointer;
@@ -112,7 +129,8 @@
   
 @media(min-width:550px){
   .container{
-
+    left: 90px;
+    
     .image_data{
       margin: 0;
       width: 40%;
@@ -138,16 +156,10 @@
       justify-content: start;
 
       .to__basket{
-        margin-top: 10px;
-        padding: 1rem 10px;
         width: 40%;
-        border-radius: 6px;
-        background: #5390e0;
-        color: whitesmoke;
-        border: none;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
+      }
+      .del__basket{
+        width: 40%;
       }
     }
   }

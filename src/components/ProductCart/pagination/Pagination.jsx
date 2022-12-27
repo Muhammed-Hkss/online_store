@@ -28,7 +28,7 @@ const Pagination = ({TOTAL_PAGE , page , setPage}) => {
 				onClick={() => prevPagination()}
         disabled={page === 1}
 			>
-				<AiOutlineArrowLeft/>
+				<AiOutlineArrowLeft className={cs.prev__icons}/>
 			</button>
 
 			<ul className={cs.list}>
@@ -50,7 +50,7 @@ const Pagination = ({TOTAL_PAGE , page , setPage}) => {
 				onClick={() => nextPagination()}
         disabled={page === TOTAL_PAGE}
 			>
-				<AiOutlineArrowRight/>
+				<AiOutlineArrowRight className={cs.next__icons}/>
 			</button>
     </div>
   )

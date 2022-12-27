@@ -1,25 +1,54 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Loading from '../../components/Loading'
 import { DelFavorites, GetFavorites } from '../../config'
+import { GetProducts } from '../../hooks/GetProducts'
 import Test from '../../Test'
 import cls from './Favorite.module.scss'
 
 
 const Favorite = () => {
   const [favorite , setfavorite] = useState('')
+  const [ refresh, setRefresh ] = React.useState('')
+  const accessToken = localStorage.getItem('accessToken')
+  const { base } = GetProducts()
+  const navigate = useNavigate()
+  let savedBase = []
 
 
-  // useEffect(() => {
-  //   GetFavorites().then(r => {
-  //     console.log(r);
-  //   })
-  // })
+
   
   useEffect(() => {
-    GetFavorites(localStorage.getItem('accessToken')).then(r => {
-      // console.log(r);
+    GetFavorites(accessToken).then(r => {
       setfavorite(r.data)
+      r.data?.map(item => {
+        return base?.map(val => val.id === item.product ? savedBase.unshift(val) : '')
+      })
+      localStorage.setItem('savedBase' , JSON.stringify(savedBase));
     })
-  }, [])
+
+    setTimeout(() => {
+      setRefresh('hello')
+    }, 1000)
+    
+  }, [refresh])
+
+
+  const baseFavorites = JSON.parse(localStorage.getItem('savedBase'))
+
+  // console.log(baseFavorites);
+
+
+  const delete_favorite = (id) => {
+    const newId = favorite?.find(val => val.product === id ? val.id : '')
+    if(accessToken){  
+      DelFavorites(accessToken, newId.id)
+      setRefresh('refreshing!')
+    }else{
+      alert('Вы не авторизованы!')
+      navigate('/auth/register')
+    }
+  } 
   
   return (
 
@@ -27,6 +56,7 @@ const Favorite = () => {
       <div>
         <Test />
       </div>
+      
 
       <div className={cls.container}>
         
@@ -35,62 +65,39 @@ const Favorite = () => {
 
           <div className={cls.favorite_data}>
             {
-              favorite && favorite.map(item => {
-                console.log(item);
-
-
-                const delete_favorite = () => {
-                  if(localStorage.getItem('accessToken')){
-                    DelFavorites(localStorage.getItem('accessToken'), item.id , item.product)
-                  }else{
-                    alert('Вы не авторизованы!')
-                    // navigate('/auth/register')
-                  }
-                }
+              baseFavorites?.length > 0 ?
+              baseFavorites.map(item => {
 
                 return(
+                  <>
+                    <div key={item.id} className={cls.glassBox}>
+                      <div className={cls.glassBox__imgBox}>
+                        <img src={item.image} alt="" />
 
-
-                    <>
-                      {/* <div key={item.id}>
-
-
-
-
-                        <div style={{border:'solid 1px black' , height:'200px' }}>
-
+                        <div className={cls.delete_btn_data}>
                           <button 
-                            // onClick={() => { 
-                            //   DelFavorites(item.id)
-                            // }}
-                            onClick={() => delete_favorite()}
+                            className={cls.delete_btn}
+                            onClick={() => delete_favorite(item.id)}
                           >
                             delete
                           </button>
-
-
                         </div>
-                      </div> */}
 
-                      <div key={item.id} className={cls.glassBox}>
-                        <div className={cls.glassBox__imgBox}>
-                          <img src={item.image} alt="" />
+                        <p className={cls.glassBox__title}>
+                          {/* {item.title} */}
 
-                          <button 
-                            onClick={() => delete_favorite()}
-                          >
-                            delete
-                          </button>
-
-                          <p className={cls.glassBox__title}>{item.title}</p>
-                          <h3 className={cls.glassBox__title}>{item.price} $</h3>
-                        </div>
+                          {
+                            item.title.length >= 20
+                              ? `${item.title.slice(0, 16)}...`
+                              : item.title
+                          }
+                        </p>
+                        <h3 className={cls.glassBox__title}>{item.price} $</h3>
                       </div>
-                    </>
-
-                  
+                    </div>
+                  </>
                 )
-              })
+              }) : <Loading />
             }
           </div>
         </div>

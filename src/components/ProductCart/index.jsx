@@ -54,9 +54,11 @@ const ProductCard = ({products , item }) => {
           <img src={item.image} alt="" />
           <p className={cls.glassBox__title}>
             {/* {item.title} */}
-						{item.title.length >= 20
-							? `${item.title.slice(0, 16)}...`
-							: item.title}
+						{
+              item.title.length >= 20
+                ? `${item.title.slice(0, 16)}...`
+                : item.title
+            }
           </p>
           <h3 className={cls.glassBox__title}>{item.price} $</h3>
           <p className={cls.glassBox__title2} >more</p>

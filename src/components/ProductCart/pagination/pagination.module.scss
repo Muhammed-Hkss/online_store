@@ -1,6 +1,7 @@
 .pagination {
   position: relative;
   top: 20px;
+  padding: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -23,6 +24,9 @@
       &.active {
         background: #79b0a1;
       }
+      &:hover{
+        background-color: #72c6b0;  
+      }
     }
   }
 
@@ -36,7 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: .3s;
+    transition: .1s;
     color: white;
     background-color: #79b0a1;
     
@@ -44,9 +48,30 @@
       opacity: .5;
     }
 
-    svg {
-      width: 80%;
-      height: 80%;
+    .prev__icons{
+      width: 65%;
+      height: 65%;
+      transition: .1s;
+    }
+
+    .next__icons {
+      width: 65%;
+      height: 65%;
+      transition: .1s;
+    }
+    &:hover{
+      background-color: #72c6b0;
+
+
+
+      .prev__icons{
+        transform: translateX(-3px);
+      }
+      
+      .next__icons{
+
+        transform: translateX(3px);
+      }
     }
   }
 }

@@ -5,8 +5,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  // overflow-x: hidden;
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
   background-position: center;
   background-size: 4%;
@@ -16,13 +14,11 @@
   .left_profile_data{
     position: relative;
     width: 40%;
-    
     background-color: white;
     border-radius: 7px;
     -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
     box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-    // overflow-x: hidden;
     background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
     background-position: center;
     background-size: 9%;
@@ -44,7 +40,6 @@
     &.active{
       position: relative;
       width: 40%;
-      // height: 90%;
       background-color: white;
       border-radius: 7px;
       -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
@@ -121,8 +116,23 @@
       // height: 200px;
   
       h2{
-        position: relative;
-        top: 1rem;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        height: 50px;
+        font-family: 'Trocchi', serif;
+        font-size: 28px;
+        font-weight: lighter;
+        color: #474747;
+      }
+
+
+
+      .bask_favor_data{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
       }
   
       button{
@@ -144,23 +154,20 @@
 
 @media(max-width:860px){
   .container{
+    background-color:#ffffff ;
 
     .left_profile_data{
-      width: 90%;
+      position: relative;
+      left: 20px;
+      width: 80%;
+      background: none;
+      // box-shadow: none;
       // height: 90%;
 
 
       &.active{
         width: 90%;
       }
-    }
-  }
-}
-
-@media(max-width:425px){
-  .container{
-
-    .left_profile_data{
 
 
       .left_profile_image_data{
@@ -172,6 +179,26 @@
           height: 200px;
         }
       }
+    }
+  }
+}
+
+@media(max-width:425px){
+  .container{
+
+    .left_profile_data{
+      // box-shadow: none;
+
+
+      // .left_profile_image_data{
+      //   top: 1px;
+    
+    
+      //   img{
+      //     width: 200px;
+      //     height: 200px;
+      //   }
+      // }
     }
   }
 }
