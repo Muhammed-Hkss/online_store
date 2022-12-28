@@ -6,6 +6,8 @@ const ProductCard = ({ item }) => {
   
   const navigate = useNavigate()
 
+  console.log(item);
+
   return (
     <>
 

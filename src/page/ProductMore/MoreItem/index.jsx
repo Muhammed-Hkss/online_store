@@ -150,11 +150,11 @@ const MoreItem = ({item}) => {
           </h3>
       </div>
 
-      <button 
+      {/* <button 
         onClick={() => to__detail_basket()}
       >
         sdfgdgfdgdsf
-      </button>
+      </button> */}
 
       <div className={cls.more__count}>
           <button

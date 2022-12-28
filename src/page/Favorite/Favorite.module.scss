@@ -10,7 +10,7 @@
 
 
   .white_bgr{
-
+  
 
 
     &::-webkit-scrollbar{
@@ -107,5 +107,16 @@
       font-size: 14px;
       cursor: pointer;
     }
+  }
+}
+
+@media(max-width:768px){
+  .container{
+    width: 95%;
+    margin: 40px;
+  }
+  .glassBox {
+    width: 100%;
+    max-width: 250px;
   }
 }

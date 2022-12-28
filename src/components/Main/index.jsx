@@ -53,6 +53,8 @@ const Main = () => {
       (page - 1) * PAGE_SIZE,
       (page - 1) * PAGE_SIZE + PAGE_SIZE
     )
+    
+    // filtredResuld
     setBase(base)
   }
   
@@ -65,7 +67,7 @@ const Main = () => {
 
   const filterResultt = (catItem) => {
     if(catItem === 'All') {
-      setFiltredResuld(base)
+      setFiltredResuld(products)
     } else {
       const result =  products && products.filter((curData) => {
         return curData.category === Number(catItem)
@@ -95,7 +97,6 @@ const Main = () => {
     <>
       <div>
         <Navbar />
-
       </div>
 
       <div className={cls.main_container}>
@@ -104,87 +105,91 @@ const Main = () => {
           <video className={cls.video} src={Video} autoPlay muted loop />
         </div>
         <h1 className={cls.video_about}>Best Online Shopping Websites</h1>
-      </div>
+
+        <div className={cls.search_data}>
+          <input 
+            className={cls.search_input}
+            type="text" 
+            placeholder='Search...'
+            value={input}
+            onChange={e => setInput(e.target.value)}
+          />
+
+        </div>
+
+{/* aaaaaaaaaaaaaaallllllllllllllll */}
 
 
 
-
-      <div className={cls.search_data}>
-        <input 
-          className={cls.search_input}
-          type="text" 
-          placeholder='Search...'
-          value={input}
-          onChange={e => setInput(e.target.value)}
-        />
-
-      </div>
-
-
-
-
-
-      <div className={cls.filter_select_data}>
-        {
-          categories?.map(item => {
-
-            return(
-              <>
-                {
-                  item.parent === null ? 
-                  '' : 
-                    <button 
-                        className={cls.filter_select} 
-                        onClick={() => filterResultt(`${item.id}`)} 
-                      >
-                        {item.title}
-                    </button>
-                }
-              </>
-            )
-          })
-        }
-      </div>
-
-
-
-      
-      <div className={cls.wrapper_data}>
-
-        
+        <div className={cls.filter_select_data}>
+          <button  className={cls.filter_select} onClick={() => filterResultt('All')}>All</button>
           {
-
-            input && filtredResuld === '' ? 
-            base && base.map(item =>{
+            categories?.map(item => {
 
               return(
-                <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
+                <>
+                  {
+                    item.parent === null ? 
+                    '' : 
+                      <button 
+                          className={cls.filter_select} 
+                          onClick={() => filterResultt(`${item.id}`)} 
+                        >
+                          {item.title}
+                      </button>
+                  }
+                </>
               )
-            }) :
-
-            filtredResuld === '' ?
-            filteredProduct && filteredProduct.map(item => (
-              <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
-            )) :
-
-            filtredResuld && filtredResuld.map(item => (
-              <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
-            ))
-
+            })
           }
+        </div>
+
+
+
         
+        <div className={cls.wrapper_data}>
+
+          
+            {
+
+              input && filtredResuld === '' ? 
+              base && base.map(item =>{
+
+                return(
+                  <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
+                )
+              }) :
+
+              filtredResuld === '' ?
+              filteredProduct && filteredProduct.map(item => (
+                <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
+              )) :
+
+              filtredResuld && filtredResuld.map(item => (
+                <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
+              ))
+
+            }
+          
+        </div>
+
+
+        <div>
+          {
+            input === '' ?
+            <div className={cls.next_prev_btn_data}>
+              <Pagination TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
+            </div> :
+            ''
+          }
+        </div>
+
+
+
       </div>
 
 
-      <div>
-        {
-          input === '' ?
-          <div className={cls.next_prev_btn_data}>
-            <Pagination TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
-          </div> :
-          ''
-        }
-      </div>
+
 
 
 

@@ -15,66 +15,68 @@
     text-align: center;
     color: gray;
   }
-}
 
-.search_data{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  .search_data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
   
-
-  .search_input{
-    margin-top: 10px;
-    padding: 1rem 10px;
-    width: 50%;
-    border-radius: 6px;
-    background: none;
-    border: 1px solid gray;
-    color: rgb(0, 0, 0);
-    font-weight: 600;
-    font-size: 14px;
-    outline: none;
+    .search_input{
+      margin-top: 10px;
+      padding: 1rem 10px;
+      width: 50%;
+      border-radius: 6px;
+      background: none;
+      border: 1px solid gray;
+      color: rgb(0, 0, 0);
+      font-weight: 600;
+      font-size: 14px;
+      outline: none;
+    }
+  }
+  
+  
+  .filter_select_data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  
+    .filter_select{
+      margin-top: 10px;
+      padding: 1rem 10px;
+      border: none;
+      outline: none;
+      width: 10%;
+      border-radius: 6px;
+      background: #3586ff;
+      color: whitesmoke;
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+  
+  
+  .wrapper_data{
+    position: relative;
+    top: 7rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+    padding: 0 20px;
+  }
+  
+  .next_prev_btn_data{
+    position: relative;
+    top: 7rem;
   }
 }
 
-
-.filter_select_data{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  .filter_select{
-    margin-top: 10px;
-    padding: 1rem 10px;
-    border: none;
-    outline: none;
-    width: 10%;
-    border-radius: 6px;
-    background: #3586ff;
-    color: whitesmoke;
-    border: none;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-  }
-}
-
-
-.wrapper_data{
-  position: relative;
-  top: 7rem;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 3rem;
-  padding: 0 20px;
-}
-
-.next_prev_btn_data{
-  position: relative;
-  top: 7rem;
-}
 
 
 @media(max-width:1840px){
@@ -96,6 +98,18 @@
     .video_data{
 
       .video{
+        width: 100%;
+      }
+    }
+    .video_about{
+      font-size: 12px;
+    }
+
+
+    .filter_select_data{
+      display: grid;
+  
+      .filter_select{
         width: 100%;
       }
     }
