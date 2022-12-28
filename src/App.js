@@ -18,7 +18,7 @@ function App() {
     <>
       <div>
         <AnimatedCur />
-          <Routes>
+        <Routes>
             <Route path='/' element={<Main/>} />
             <Route path='/user/register' element={<Register/>} />
             <Route path='/auth/login' element={<Login/>} />
@@ -40,7 +40,7 @@ function App() {
 
 
             
-          </Routes>
+        </Routes>
       </div>
       
     </>
