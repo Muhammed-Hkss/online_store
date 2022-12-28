@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../components/Loading'
+import Navbar from '../../components/Navbar'
 import { DelFavorites, GetFavorites } from '../../config'
 import { GetProducts } from '../../hooks/GetProducts'
-import Test from '../../Test'
 import cls from './Favorite.module.scss'
 
 
@@ -36,8 +36,6 @@ const Favorite = () => {
 
   const baseFavorites = JSON.parse(localStorage.getItem('savedBase'))
 
-  // console.log(baseFavorites);
-
 
   const delete_favorite = (id) => {
     const newId = favorite?.find(val => val.product === id ? val.id : '')
@@ -54,7 +52,8 @@ const Favorite = () => {
 
     <>
       <div>
-        <Test />
+        <Navbar />
+
       </div>
       
 
@@ -70,7 +69,7 @@ const Favorite = () => {
 
                 return(
                   <>
-                    <div key={item.id} className={cls.glassBox}>
+                    <div onClick={() => navigate(`/product/${item.id}`)} key={item.id} className={cls.glassBox}>
                       <div className={cls.glassBox__imgBox}>
                         <img src={item.image} alt="" />
 
@@ -84,7 +83,6 @@ const Favorite = () => {
                         </div>
 
                         <p className={cls.glassBox__title}>
-                          {/* {item.title} */}
 
                           {
                             item.title.length >= 20
@@ -97,7 +95,7 @@ const Favorite = () => {
                     </div>
                   </>
                 )
-              }) : <Loading />
+              }) : <div style={{position:'relative' , top:'50%'}}><Loading  /></div>
             }
           </div>
         </div>

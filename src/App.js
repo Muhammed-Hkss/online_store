@@ -9,37 +9,40 @@ import Favorite from './page/Favorite';
 import ProductMore from './page/ProductMore';
 import Basket from './page/Basket';
 import Test from './Test';
-import { routesList } from './utils/routesList';
 import Account from './page/Account';
 import Settings from './page/Settings';
+import AnimatedCur from './components/AnimatedCursor/inedx';
 
 function App() {
   return (
     <>
-      <div className='App'></div>
-        <Routes>
-          <Route path='/' element={<Main/>} />
-          <Route path='/user/register' element={<Register/>} />
-          <Route path='/auth/login' element={<Login/>} />
-          <Route path='/about' element={<About/>} />
-          <Route path='/favorite' element={<Favorite/>} />
-          <Route path='/product/:id' element={<ProductMore/>} />
+      <div>
+        <AnimatedCur />
+          <Routes>
+            <Route path='/' element={<Main/>} />
+            <Route path='/user/register' element={<Register/>} />
+            <Route path='/auth/login' element={<Login/>} />
+            <Route path='/about' element={<About/>} />
+            <Route path='/favorite' element={<Favorite/>} />
+            <Route path='/product/:id' element={<ProductMore/>} />
 
 
 
-          <Route element={<PrivateRoutes/>}>
-            <Route path='/account' element={<Account/>} />
-            <Route path='/basket' element={<Basket/>} />
-            <Route path='/settings' element={<Settings/>} />
-          </Route>
+            <Route element={<PrivateRoutes/>}>
+              <Route path='/account' element={<Account/>} />
+              <Route path='/basket' element={<Basket/>} />
+              <Route path='/settings' element={<Settings/>} />
+            </Route>
 
 
-          <Route path='/test' element={<Test/>} />
+            <Route path='/test' element={<Test/>} />
 
 
 
-          
-        </Routes>
+            
+          </Routes>
+      </div>
+      
     </>
   );
 }

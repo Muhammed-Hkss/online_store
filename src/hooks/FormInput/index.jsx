@@ -1,7 +1,5 @@
 import React from 'react'
 import cls from './FormInput.module.scss'
-// import { RiLockPasswordLine } from 'react-icons/ri'
-// <RiLockPasswordLine />
 const FormInput = ({
 	inputType,
 	placeholder,

@@ -25,16 +25,11 @@ const Register = () => {
       signUp(data).then(r => {
         console.log(r);
         if(r){
-          // localStorage.setItem('accessToken', r.data.access)
           navigate('/')
         }
       })
     }
   };
-
-  // signUp
-
-  // const fileRef = createRef<HTMLInputElement>();
 
 
   return (
@@ -80,7 +75,7 @@ const Register = () => {
                 register={register}
                 errors={errors.phone_number?.message}
               />
-              <FormInput
+              {/* <FormInput
                 // type="file"
                 // id="avatar" name="avatar"
                 // accept=".jpg, .jpeg, .png"
@@ -90,7 +85,7 @@ const Register = () => {
                 registerName='avatarka'
                 register={register}
                 errors={errors.avatarka?.message}
-              />
+              /> */}
               <FormInput
                 inputType='text'
                 placeholder='Введите text'
@@ -102,7 +97,6 @@ const Register = () => {
               
               <FormButton isValid={isValid} buttonText='Создать' />
             </div>
-            {/* <Link className={cls.route} to='/auth/login'>Уже есть аккаунт</Link> */}
           </form>
           <div className={cls.login_image}>
             <img src="https://colorlib.com/etc/regform/colorlib-regform-7/images/signup-image.jpg" alt="" />

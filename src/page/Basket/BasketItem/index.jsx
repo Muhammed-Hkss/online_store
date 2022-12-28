@@ -7,7 +7,7 @@ const BasketItem = (product) => {
     <div>
       {
         product.products_data && product.products_data.map(item => {
-            // console.log(item);
+            // console.lg(item);
         })
       }
     </div>

@@ -38,6 +38,28 @@
 }
 
 
+.filter_select_data{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  .filter_select{
+    margin-top: 10px;
+    padding: 1rem 10px;
+    border: none;
+    outline: none;
+    width: 10%;
+    border-radius: 6px;
+    background: #3586ff;
+    color: whitesmoke;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+
 
 .wrapper_data{
   position: relative;

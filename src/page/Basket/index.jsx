@@ -6,9 +6,11 @@ import { BiX } from 'react-icons/bi'
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../components/Loading';
 import { BASE_URL } from '../../config/api';
-import Test from '../../Test';
+import useAlert from '../../hooks/useAlert';
+import Navbar from '../../components/Navbar';
 
 const Basket = () => {
+  const { actions } = useAlert()
   const [ getBaskets , setGetBaskets ] = useState('') 
   const accessToken = localStorage.getItem('accessToken')
   const [ refresh, setRefresh ] = React.useState('')
@@ -19,28 +21,12 @@ const Basket = () => {
 
 
 
-  
-  // useEffect(() => {
-  //   GetBaskets(localStorage.getItem('accessToken')).then(r => {
-
-  //     const newData2 = Object.entries(r.data).map(([ id ,item]) => {
-  //       return {
-  //         id,
-  //         ...item.products_data
-  //       }
-  //     })
-  //     setGetBaskets(newData2)
-  //   })
-  // }, [])
 
   React.useEffect(() => {
     if(accessToken){
       GetBaskets(accessToken)
         .then(res => {
           setGetBaskets(res.data)
-          // res.data?.map(item => {
-          //   return base?.map(val => val.id === item.product ? getBaskets.unshift(val) : '')
-          // })
         })  
     }else{
       alert('Вы не авторизованы!')
@@ -60,8 +46,7 @@ const Basket = () => {
         .then(r => {
           setGetBaskets(r.data)
         })  
-      })
-      // setRefresh('refreshing!')w
+      }) && actions.sweetAlert('успешно удалено')
     }else{
       alert('Вы не авторизованы!')
       navigate('/user/register')
@@ -69,14 +54,14 @@ const Basket = () => {
   } 
 
   
-// console.log(getBaskets);
 if(!getBaskets) return <div style={{display:'flex' , justifyContent:'center'}}><Loading /></div>
 
 
   return (
     <>
       <div>
-        <Test />
+        <Navbar  />
+
       </div>
 
       <div className={cls.container}>
@@ -96,13 +81,6 @@ if(!getBaskets) return <div style={{display:'flex' , justifyContent:'center'}}><
             <button className={cls.no_basket_btn} onClick={() => navigate('/')}>Перейти на главную</button> : 
             
             getBaskets?.map((item , index) => {
-              // console.log(item);
-
-              // return(
-              //   <div key={item.id}>
-              //     <p>{item[0].title}</p>
-              //   </div>
-              // )
 
 
               totalCartPrice += item.products_data[0].price * 1
@@ -135,7 +113,6 @@ if(!getBaskets) return <div style={{display:'flex' , justifyContent:'center'}}><
           </div>
           <div className={cls.checkout}>
             <p>{getBaskets.length}  Products</p>
-            {/* <p>Shipping   5$</p> */}
           </div>
           <div className={cls.checkout_total}>
             <p>Total:</p>
@@ -147,6 +124,8 @@ if(!getBaskets) return <div style={{display:'flex' , justifyContent:'center'}}><
           </div>
         </div>
       </div>
+
+      
     </>
    
   )

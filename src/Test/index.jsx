@@ -1,119 +1,81 @@
+import Navbar from '../components/Navbar';
 import cls from './Test.module.scss'
-import {IoLogoSass} from 'react-icons/io'
-import {AiOutlineMenu , AiOutlineLogin} from 'react-icons/ai'
-import {BiLogOutCircle} from 'react-icons/bi'
-import { useEffect, useState } from 'react'
-import { NavbarList } from '../utils/Navbar'
-import { useNavigate } from 'react-router-dom'
-import { GetUser } from '../config'
+import { motion } from 'framer-motion'
+
+import AboutVideo from '../video/videoplayback.mp4'
 
 
 
 function Test() {
-  const [isDropdown , setIsDropdown] = useState(false)
-  const AccessToken = localStorage.getItem('accessToken')
-  const navigate = useNavigate()
-  const [users , setUser] = useState(null)
-
-  // console.log(users);
-
-
-
-
-  useEffect(() => {
-    GetUser(localStorage.getItem('accessToken')).then(r => {
-      setUser(r.data);
-    })
-  }, [])
-
-  const logoutHandler =  (e) => {
-		e.preventDefault()
-		localStorage.clear()
-		window.location.reload()
-	}
-
 
     return (
       <>
-        <div className={cls.container}>
-          <div className={isDropdown ? `${cls.sidebare} ${cls.active}` : cls.sidebare} >
-            <div className={cls.logo_container}>
-              <div className={cls.logo}>
-                <i><IoLogoSass /></i>
-                <div className={cls.logo_name}>Logo</div>
-              </div>
+
+      <div>
+        <Navbar />
+      </div>
 
 
-              <i 
-                onClick={() => setIsDropdown(prev => !prev)}
-              >
-                <AiOutlineMenu id={cls.btn} />
-              </i>
-              
+      
+      <motion.div className={cls.container}>
+        <div className={cls.video_data}>
+          <video className={cls.about_video} src={AboutVideo} autoPlay muted loop />
+        </div>
+        <div className={cls.white_block}>
 
+          <div className={cls.custom_shape_divider_bottom_1671079934}>
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+              <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className={cls.shape_fill}></path>
+            </svg>
+          </div>
 
+          <div className={cls.white_block_data}>
+            <div className={cls.white_block_image_data}>
+              <img src="https://img.freepik.com/free-vector/online-shopping-abstract-concept-illustration_335657-3714.jpg?w=826&t=st=1671122893~exp=1671123493~hmac=f31436cc1885c2e0b58c47776f2ee06b00791a87fd791f5bddf60db30bc9b8c5" alt="" />
             </div>
-            <ul className={cls.nav_list}>
-                {/* <li>
-                  <i className={cls.bx_search}><BsSearch /></i>
-                  <input type="text" placeholder='Search' />
-                  <span className={cls.tooltip}>Search</span>
-                </li> */}
-                {
-                  NavbarList.map(item => <li key={item.id}>
-                    <a href={item.path}>
-                      <i>{item.logo}</i>
-                      <span className={cls.links_name}>{item.title}</span>
-                    </a>
-                    <span className={cls.tooltip}>{item.span}</span>
-                  </li>
-                  )
-                }
-            </ul>
-            <div className={cls.profile_content}>
-                <div className={cls.profile}>
-                  <div className={cls.profile_detals}>
-                    {/* <img src="https://www.hdcarwallpapers.com/walls/2012_lexus_lf_lc_blue_concept-wide.jpg" alt="" /> */}
-                    {
-                      users?.avatarka === null ? <img src='https://pbs.twimg.com/media/FbkmozNXgAMgVRX?format=jpg&name=large' alt="null" /> : <img src={users?.avatarka} alt="null" />
-                    }
-                    <div className={cls.name_job}>
-                      <p className={cls.name}>{users?.username}</p>
-                      <p className={cls.job}>{users?.phone_number}</p>
-                    </div>
-                  </div>
-                  {/* <a href="/auth/login" className={cls.log}>
-                    <BiLogOut  id={cls.log_out}/>
-                    
-                  </a> */}
-                    {/* {
-                      !AccessToken ? 
-                      <button onClick={() => navigate('/auth/login')} className={cls.register_btn}>
-                        войти
-                      </button> :
-                      <BiLogOut onClick={() => navigate('/auth/login')} className={cls.register_btn} />
-                    } */}
 
-                  {
-                    !AccessToken ?
+            <div className={cls.white_block_text_data}>
+              <h1>LOGO</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste animi aperiam culpa, sequi nam, assumenda eos iure molestiae quasi repudiandae omnis saepe explicabo adipisci voluptas deleniti dolore. Doloremque, impedit nemo! Beatae recusandae fugiat vitae soluta veniam debitis eaque sint ab dolor quo. Praesentium, eum ipsam iste, velit ut doloremque modi voluptatum earum quo esse sit architecto vitae, sint corporis aspernatur cum quod eligendi nisi? Minima temporibus nostrum culpa fugiat amet rem ducimus, qui eius architecto iste ad, praesentium nihil totam ea illum ratione optio accusamus, natus doloribus minus consequatur odit suscipit ullam quos! Quae ea assumenda eos, aperiam atque natus.</p>
+            </div>
+          </div>
 
-                    <a href="/auth/login" className={cls.log}>
-                      <AiOutlineLogin id={cls.log_out}/>
-                    </a>:
+          <div className={cls.white_block_data}>
+            <div className={cls.white_block_text_data}>
+              <h1>LOGO</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste animi aperiam culpa, sequi nam, assumenda eos iure molestiae quasi repudiandae omnis saepe explicabo adipisci voluptas deleniti dolore. Doloremque, impedit nemo! Beatae recusandae fugiat vitae soluta veniam debitis eaque sint ab dolor quo. Praesentium, eum ipsam iste, velit ut doloremque modi voluptatum earum quo esse sit architecto vitae, sint corporis aspernatur cum quod eligendi nisi? Minima temporibus nostrum culpa fugiat amet rem ducimus, qui eius architecto iste ad, praesentium nihil totam ea illum ratione optio accusamus, natus doloribus minus consequatur odit suscipit ullam quos! Quae ea assumenda eos, aperiam atque natus.</p>
+            </div>
 
-                    <a href="/auth/login" className={cls.log}>
-                      <BiLogOutCircle onClick={logoutHandler}  id={cls.log_out}/>
-                    </a> 
-                  }
-                </div>
+
+            <div className={cls.white_block_image_data}>
+              <img src="https://img.freepik.com/free-vector/digital-marketplace-application-remote-business-e-commerce-internet-store-mobile-market-customer-using-smartphone-cartoon-character-vector-isolated-concept-metaphor-illustration_335657-2762.jpg?w=826&t=st=1671122918~exp=1671123518~hmac=0d1234f0fc9e5dc17f19458b5e4cd8988bc93cf357bb0cb0dbc6a12f12ad61d7" alt="" />
+            </div>
+
+            
+          </div>
+
+          <div className={cls.white_3_block_data}>
+
+            <div className={cls.white_3_text_data}>
+              <h1 >
+                Lorem ipsum dolor sit amet consectetur
+              </h1>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quod quidem ipsa eos aliquam facere labore qui dolor! Necessitatibus, minima. Suscipit magnam sed voluptate aut repellat cum maiores ab saepe.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quod quidem ipsa eos aliquam facere labore qui dolor! Necessitatibus, minima. Suscipit magnam sed voluptate aut repellat cum maiores ab saepe.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quod quidem ipsa eos aliquam facere labore qui dolor! Necessitatibus, minima. Suscipit magnam sed voluptate aut repellat cum maiores ab saepe.
+              </p>
+            </div>
+
+
+            <div className={cls.white_3_image_data}>
+             {/* <TextItem /> */}
             </div>
           </div>
         </div>
+      </motion.div>
 
-        {/* <div className={cls.home_content}>
-          <div className={cls.text}>Home Content</div>
-        </div>         */}
-      </>
+    </>
     );
 }
 

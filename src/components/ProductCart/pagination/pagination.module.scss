@@ -22,16 +22,15 @@
       background: #ccc;
       cursor: pointer;
       &.active {
-        background: #79b0a1;
+        background: #3586ff;
       }
       &:hover{
-        background-color: #72c6b0;  
+        background-color: #497dcb;  
       }
     }
   }
 
   .btn {
-    // position: relative;
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -42,7 +41,7 @@
     align-items: center;
     transition: .1s;
     color: white;
-    background-color: #79b0a1;
+    background-color: #3586ff;
     
     &:disabled{
       opacity: .5;
@@ -60,7 +59,7 @@
       transition: .1s;
     }
     &:hover{
-      background-color: #72c6b0;
+      background-color: #3762a3;
 
 
 

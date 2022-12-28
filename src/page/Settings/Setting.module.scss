@@ -49,13 +49,13 @@
           rgba(lightgrey, 0) 0, 
           rgba(lightgrey, .8) 50%, 
           rgba(lightgrey, 0) 100%
-        ),                          //animation blur
-        var(--title-skeleton),      //title
-        var(--desc-line-skeleton),  //desc1
-        var(--desc-line-skeleton),  //desc2
-        var(--avatar-skeleton),     //avatar
-        var(--footer-skeleton),     //footer bar
-        var(--card-skeleton)        //card
+        ),                          
+        var(--title-skeleton),      
+        var(--desc-line-skeleton),  
+        var(--desc-line-skeleton),  
+        var(--avatar-skeleton),     
+        var(--footer-skeleton),     
+        var(--card-skeleton)        
       ;
   
       background-size:
@@ -69,13 +69,13 @@
       ;
       
       background-position:
-        -150% 0,                      //animation
-        var(--title-position),        //title
-        var(--desc-line-1-position),  //desc1
-        var(--desc-line-2-position),  //desc2
-        var(--avatar-position),       //avatar
-        var(--footer-position),       //footer bar
-        0 0                           //card
+        -150% 0,                      
+        var(--title-position),        
+        var(--desc-line-1-position),  
+        var(--desc-line-2-position),  
+        var(--avatar-position),       
+        var(--footer-position),       
+        0 0                           
       ;
   
       background-repeat: no-repeat;

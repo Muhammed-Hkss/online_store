@@ -8,7 +8,8 @@ import cls from './Account.module.scss'
 import { BiXCircle } from 'react-icons/bi'
 import { FiSettings } from 'react-icons/fi'
 import Loading from '../../components/Loading'
-import Test from '../../Test'
+import Navbar from '../../components/Navbar'
+// import Test from '../../Test'
 
 
 const Account = () => {
@@ -72,11 +73,13 @@ const Account = () => {
 
 
 
-  if(!users) return <div style={{display:'flex' , justifyContent:'center' , position:'relative' , top:'20rem'}}><Loading /></div>
+  if(!users) return <div style={{display:'flex' , justifyContent:'center'}}><Loading /></div>
   return (
     <>
       <div>
-        <Test />
+        <Navbar />
+
+        {/* <Test /> */}
       </div>
 
       <div className={cls.container}>
@@ -180,6 +183,10 @@ const Account = () => {
 
         </div>
       </div>
+
+
+
+      
     </>
   )
 }

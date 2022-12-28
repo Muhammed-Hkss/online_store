@@ -1,8 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import Navbar from '../../components/Navbar';
 import { ProductsMore } from '../../config'
-import Test from '../../Test';
-// import cls from './ProductMore.module.scss'
 import MoreItem from './MoreItem';
 
 
@@ -24,7 +23,7 @@ const ProductMore = () => {
   return (
     <>
       <div>
-        <Test />
+        <Navbar />
       </div>
 
       <div>

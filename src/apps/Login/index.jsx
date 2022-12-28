@@ -33,8 +33,6 @@ const Login = () => {
         console.log(r);
         if(r.data){
           localStorage.setItem('accessToken', r.data.access)
-
-          // access
           navigate('/account')
         }
       })
@@ -44,9 +42,6 @@ const Login = () => {
   return (
     <div 
       className={`${cls.container} ${DarkMode === 'true' ? `${cls.active}` : `${cls.inactive}`}`}
-      
-      // className={cls.container}
-      
     >
 
       <div className={cls.center_login_data}>
@@ -83,7 +78,6 @@ const Login = () => {
               />
               <FormButton isValid={isValid} buttonText='Войти' />
             </div>
-            {/* <Link to='/user/register'>Еще нет аккаунта</Link> */}
           </form>
         </div>
       </div>

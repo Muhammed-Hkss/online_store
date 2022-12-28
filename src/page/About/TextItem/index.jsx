@@ -9,7 +9,6 @@ const TextItem = () => {
     <>
       <div className='container'>
         <div className="flip-card-container" 
-        // style="--hue: 220"
         >
           <div className="flip-card">
 

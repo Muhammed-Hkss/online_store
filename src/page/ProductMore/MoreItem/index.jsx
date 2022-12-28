@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import cls from './MoreItem.module.scss'
-import { Baskets, DelFavorites, GetBaskets, GetFavorites, PostBaskets, PostFavorites, ProductsMore } from '../../../config'
+import { Baskets, DelFavorites, GetBaskets, GetFavorites, PostBaskets, PostDetailBaskets, PostFavorites, ProductsMore } from '../../../config'
 import ReactImageMagnify from 'react-image-magnify';
 import { AiFillHeart , AiOutlineHeart } from 'react-icons/ai'
 import Loading from '../../../components/Loading';
+import useAlert from '../../../hooks/useAlert';
 
 
 const MoreItem = ({item}) => {
-  // const [moreData , setMoreData] = useState(null)
+  const { actions } = useAlert()
   const [ saveBase, setSaveBase ] = useState(null)
   const [ count, setCount ] = useState(1)
   const [ have, setHave ] = useState(false)
-  // const [ getBasket, setGetBasket ] = useState(false)
   const accessToken = localStorage.getItem('accessToken')
+  const [ getBaskets , setGetBaskets ] = useState('') 
   const navigate = useNavigate()
 
   const [ refresh, setRefresh ] = React.useState('')
@@ -34,29 +35,7 @@ const MoreItem = ({item}) => {
     }, 1000)
   }, [refresh]) 
 
-
-  // useEffect(() => {
-  //   GetBaskets(accessToken).then(r => {
-  //     setGetBasket(r.data)
-  //   })
-  // } , [])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  
-  const [ getBaskets , setGetBaskets ] = useState('') 
 
   const to__basket = () => {
     if(accessToken){
@@ -66,7 +45,7 @@ const MoreItem = ({item}) => {
         .then(r => {
           setGetBaskets(r.data)
         })  
-      })
+      }) && actions.sweetAlert('успешно добавлен')
       setRefresh('post!')
     }else{
       alert('Вы не авторизованы')
@@ -74,28 +53,13 @@ const MoreItem = ({item}) => {
     }
   }
 
-  // console.log(getBaskets);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   const to__favorite = () => {
     if(accessToken){
       PostFavorites(accessToken, {product: item.id, is_active: item.is_active})
+      && actions.sweetAlert('успешно добавлен')
       setRefresh('post')
     }else{
       alert('Вы не авторизованы!')
@@ -119,35 +83,45 @@ const MoreItem = ({item}) => {
 
 
 
-  // console.log(getBasket);
+
+
+  const to__detail_basket = () => {
+    if(accessToken){
+      PostDetailBaskets(accessToken, {product: item.id, amount: count })
+
+      setRefresh('post!')
+    }else{
+      alert('Вы не авторизованы')
+      navigate('/user/register')
+    }
+  }
+
 
 
   if(!item) return <div style={{display:'flex' , justifyContent:'center'}}><Loading /></div>
   return (
     <div className={cls.container}>
       <div className={cls.image_data}>
-        <div>
-            <ReactImageMagnify
-              {...{
-                smallImage: {
-                  alt: 'Wristwatch by Ted Baker London',
-                  isFluidWidth: true,
-                  src: item?.image,
-                },
+        <ReactImageMagnify
+          {...{
+            smallImage: {
+              alt: 'Wristwatch by Ted Baker London',
+              isFluidWidth: true,
+              src: item?.image,
+              width: 400,
+              height: 400,
+            },
 
-                largeImage: {
-                  src: item?.image,
-                  width: 1200,
-                  height: 1800,
-                },
-
-                enlargedImageContainerDimensions: {
-                  width: '150%',
-                  height: '150%',
-                },
-              }}
-            />
-        </div>
+            
+            largeImage: {
+              src: item?.image,
+              width: 900,
+              height: 900,
+            },
+            
+          }}
+          
+        />
       </div>
 
       <div className={cls.text_data}>
@@ -176,6 +150,12 @@ const MoreItem = ({item}) => {
           </h3>
       </div>
 
+      <button 
+        onClick={() => to__detail_basket()}
+      >
+        sdfgdgfdgdsf
+      </button>
+
       <div className={cls.more__count}>
           <button
             onClick={() => setCount(count - 1)}
@@ -196,33 +176,25 @@ const MoreItem = ({item}) => {
       </div>
 
 
+       
 
       <div className={cls.to__basket_data}>
 
-        {/* <button 
-          className={cls.to__basket}
-          onClick={() => to__basket()}
-        >
-          В корзину
-        </button> */}
 
         {
-            // console.log(item?.id),
-            // console.log(basket),
-            // item?.id === basket.products_data[0].id ? 
-            getBaskets.length === 0 ?
-            <button
-              className={cls.to__basket}
-              onClick={() => to__basket()}
-            >
-              В корзину
-            </button>: 
-            <button 
-              className={cls.del__basket} 
-              onClick={() => navigate('/basket')}
-            >
-              Перейти в корзину
-            </button> 
+          getBaskets.length === 0 ?
+          <button
+            className={cls.to__basket}
+            onClick={() => to__basket()}
+          >
+            В корзину
+          </button>: 
+          <button 
+            className={cls.del__basket} 
+            onClick={() => navigate('/basket')}
+          >
+            Перейти в корзину
+          </button> 
         }
       </div>
     </div>

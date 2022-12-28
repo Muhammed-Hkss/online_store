@@ -33,6 +33,7 @@
       border-bottom: solid 1px black;
       margin: 20px;
       padding: 20px;
+      
 
       .image_data{
         cursor: pointer;
@@ -99,23 +100,48 @@
 }
 
 
-@media(max-width:'1840px'){
+@media(max-width:1840px){
   .container{
     width: 100%;
   }
 }
 
-@media(max-width:'760px'){
+@media(max-width:760px){
   .container{
     display: grid;
     justify-content: center;
 
     .card_data{
       width: 100%;
+      left: 0px;
+
+
+      .card{
+        gap: 18px;
+
+        p{
+          font-size: 13px;
+        }
+      }
     }
 
     .checkout_data{
-      width: 90%;
+      width: 100%;
+    }
+  }
+}
+
+@media(max-width:480px){
+  .container{
+    justify-content: end;
+
+    .card_data{
+      width: 100%;
+
+    }
+
+    .checkout_data{
+      width: 100%;
     }
   }
 }

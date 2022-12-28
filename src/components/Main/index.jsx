@@ -8,8 +8,8 @@ import Pagination from '../ProductCart/pagination/Pagination'
 import { Link } from 'react-router-dom'
 import Loading from '../Loading'
 import Anchor from '../Anchor/Anchor'
-import Test from '../../Test'
-// import { useParams } from 'react-router-dom'
+import MultiDropdown from './MultiDropdown'
+import Footer from '../Footer'
 
 
 
@@ -19,7 +19,6 @@ const Main = () => {
 	const [base, setBase] = useState(products)
 
   const [input , setInput] = useState('')
-  // const [dropDown , setDropDown] = useState(null)
 
 
   const [categories , setCategories] = useState(null)
@@ -27,14 +26,9 @@ const Main = () => {
   const PAGE_SIZE = 6
 	const TOTAL_PAGE = Math.ceil(products?.length / PAGE_SIZE)
 
-  // const filteredProduct = products && products.filter(item => item.category === 1 && item.title.toLowerCase().includes(input.toLowerCase()) ? item : null)
   const filteredProduct = base && base.filter(item =>item.title.toLowerCase().includes(input.toLowerCase()) ? item : null)
-
-  // console.log(products);
-  // console.log(filteredProduct);
   
   useEffect(() => {
-    // setPage(1)
     Products().then(r => {
       setProducts(r.data)
       setBase(r.data)
@@ -65,23 +59,6 @@ const Main = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-  // const num = Number('2020');
-  // console.log(num);
-
-
-
-
-
-
   const [filtredResuld , setFiltredResuld] = useState('')
 
 
@@ -91,8 +68,6 @@ const Main = () => {
       setFiltredResuld(base)
     } else {
       const result =  products && products.filter((curData) => {
-        // console.log(catItem);
-        // console.log(curData.category === Number(catItem));
         return curData.category === Number(catItem)
       })
       setFiltredResuld(result)
@@ -100,7 +75,6 @@ const Main = () => {
   }
 
 
-console.log(filtredResuld);
 
 
 
@@ -120,9 +94,8 @@ console.log(filtredResuld);
   return (
     <>
       <div>
-        {/* <Navbar /> */}
+        <Navbar />
 
-        <Test />
       </div>
 
       <div className={cls.main_container}>
@@ -144,66 +117,33 @@ console.log(filtredResuld);
           value={input}
           onChange={e => setInput(e.target.value)}
         />
+
       </div>
 
 
-        
-      {/* <div style={{display:'flex'}}>
-        {
-          categories && categories.map(item => (
-            <div key={item.id}>
-              <button>
-                {item.title}
-              </button>
-            </div>
-          ))
-        }
-      </div> */}
 
 
 
-      <div style={{display:'flex' , justifyContent:'center'}}>
+      <div className={cls.filter_select_data}>
         {
           categories?.map(item => {
-            // console.log(item);
-            // id: 9, title: 'Женская',
 
             return(
               <>
-                <div key={item.id}>
-                  {
-                    item.parent === null ? 
-                    '' : 
-                    <div>
-                      <button 
+                {
+                  item.parent === null ? 
+                  '' : 
+                    <button 
+                        className={cls.filter_select} 
                         onClick={() => filterResultt(`${item.id}`)} 
-                        
-                        // onClick={() => removePoducts(`${item.id}`)}
                       >
                         {item.title}
-                      </button>
-                    </div>
-                  }
-                </div>
+                    </button>
+                }
               </>
             )
           })
         }
-        {/* <select className={cls.filter_select} onChange={(e => filterResultt(e.target.value))}>
-          <option>Language</option>
-          <option>All</option>
-          {categories && categories.map(item => (
-
-          item.parent === null ?  '' : 
-          <option
-            key={item.id} 
-            // className={cls.filter_button}
-            onClick={() => filterResultt(`${item.id}`)} 
-          >
-            {item.id}
-          </option>
-          ))}
-        </select> */}
       </div>
 
 
@@ -216,7 +156,6 @@ console.log(filtredResuld);
 
             input && filtredResuld === '' ? 
             base && base.map(item =>{
-              // console.log(item);
 
               return(
                 <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
@@ -233,11 +172,6 @@ console.log(filtredResuld);
             ))
 
           }
-          {/* {
-            filtredResuld && filtredResuld.map(item => (
-              <ProductCard  key={item.id} products={products} item={item}  TOTAL_PAGE={TOTAL_PAGE} page={page} setPage={setPage} />
-            ))
-          } */}
         
       </div>
 
@@ -254,39 +188,15 @@ console.log(filtredResuld);
 
 
 
-
-
-      {/* const to__favorite = () => {
-        if(accessToken){
-          PostFavorites(accessToken, {products: [item] , product: item.id , is_active: item.is_active})
-        }else{
-          alert('Вы не авторизованы!')
-          navigate('/user/register')
-        }
-      }
-
-      
-
-      const to__basket = () => {
-        if(accessToken){
-          PostBaskets(accessToken, {products: [JSON.stringify(item.id)] , count , is_active: item.is_active})
-        }else{
-          alert('Вы не авторизованы!')
-          navigate('/user/register')
-        }
-      } */}
-
-
-
-
-
       <div>
         <Anchor />
       </div>
 
 
         
-      
+      <div>
+        <Footer />
+      </div>
     </>
     
   )

@@ -1,118 +1,94 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { NavbarList } from '../../utils/Navbar'
 import cls from './Navbar.module.scss'
-import { BiMenu , BiCategory } from 'react-icons/bi'
-import { motion } from 'framer-motion'
+import {IoLogoSass} from 'react-icons/io'
+import {AiOutlineMenu , AiOutlineLogin} from 'react-icons/ai'
+import {BiLogOutCircle} from 'react-icons/bi'
+import { useEffect, useState } from 'react'
+import { NavbarList } from '../../utils/Navbar'
+import { useNavigate } from 'react-router-dom'
+import { GetUser } from '../../config'
 
-const Navbar = () => {
-  const [open , setOpen] = useState(false)
+
+
+function Navbar() {
+  const [isDropdown , setIsDropdown] = useState(false)
+  const AccessToken = localStorage.getItem('accessToken')
   const navigate = useNavigate()
-  let menuRef = useRef()
+  const [users , setUser] = useState(null)
+
 
   useEffect(() => {
-    let handler = (e)=>{
-      if(!menuRef.current.contains(e.target)){
-        setOpen(false)
-      }
-    }
+    GetUser(localStorage.getItem('accessToken')).then(r => {
+      setUser(r.data);
+    })
+  }, [])
 
-    document.addEventListener("mousedown" , handler)
-
-
-    return() =>{
-      document.removeEventListener("mousedown" , handler)
-    }
-  } , [])
-  
-  const AccessToken = localStorage.getItem('accessToken')
-  
+  const logoutHandler =  (e) => {
+		e.preventDefault()
+		localStorage.clear()
+		window.location.reload()
+	}
 
 
+    return (
+      <>
+        <div className={cls.container}>
+          <div className={isDropdown ? `${cls.sidebare} ${cls.active}` : cls.sidebare} >
+            <div className={cls.logo_container}>
+              <div className={cls.logo}>
+                <i><IoLogoSass /></i>
+                <div className={cls.logo_name}>Logo</div>
+              </div>
 
 
-
-  const featrueAnimation = {
-    hidden:{
-      y: -20,
-      opacity:0,
-    },
-    visible: custom => ({
-      y: 0,
-      opacity: 1,
-      transition: {delay: custom * 0.2},
-    }),
-  }
-
-
-
-  return (
-    <motion.div 
-      initial='hidden'
-      whileInView='visible'
-      viewport={{ amount: 0.2,  once: true ,}}
-      className={cls.navbar_container}
-    >
-
-      <div className={cls.row}>
-
-        <div className={cls.logo_data}>
-          {/* <h2 onClick={() => navigate('/')} className={cls.logo_text}>Logo</h2> */}
-          <img onClick={() => navigate('/')} className={cls.logo_img} src="https://www.pinclipart.com/picdir/big/52-520379_retail-store-icon-pictures-to-pin-on-pinterest.png" alt="logo" />
-        </div>
-
-        
-        <ul className={cls.list_data}>
-          {
-            NavbarList.map((item , index) => (
-              <motion.li 
-                key={item.id}
-                custom={index + 1}
-                variants={featrueAnimation}
+              <i 
+                onClick={() => setIsDropdown(prev => !prev)}
               >
-                <Link to={item.path}>{item.title}</Link>
-              </motion.li>
-            ))
-          }
-        </ul>
-        
-        <div className={cls.category}>
-          <BiCategory />
-          
-          
+                <AiOutlineMenu id={cls.btn} />
+              </i>
+              
 
-          {
-            !AccessToken ? 
-            <button onClick={() => navigate('/auth/login')} className={cls.register_btn}>
-              войти
-            </button> :
-            <button onClick={() => navigate('/auth/login')} className={cls.register_btn}>
-              выйти
-            </button>
-          }
-        </div>
 
-        
-        <div className={cls.menu_container} ref={menuRef}>
-          <div className={cls.menu_trigger} onClick={() => {setOpen(!open)}}>
-            <BiMenu className={cls.menuButton}/>
-          </div>
-          <div className={`${cls.dropdown_menu} ${open? `${cls.active}` : `${cls.inactive}`}`}>
-            <ul className={cls.dropdawn_list_data}>
-              {
-                NavbarList.map(item => (
-                  <li key={item.id}>{item.title}</li>
-                ))
-              }
+            </div>
+            <ul className={cls.nav_list}>
+                {
+                  NavbarList.map(item => <li key={item.id}>
+                    <a href={item.path}>
+                      <i>{item.logo}</i>
+                      <span className={cls.links_name}>{item.title}</span>
+                    </a>
+                    <span className={cls.tooltip}>{item.span}</span>
+                  </li>
+                  )
+                }
             </ul>
+            <div className={cls.profile_content}>
+                <div className={cls.profile}>
+                  <div className={cls.profile_detals}>
+                    {
+                      users?.avatarka === null ? <img src='https://pbs.twimg.com/media/FbkmozNXgAMgVRX?format=jpg&name=large' alt="null" /> : <img src={users?.avatarka} alt="null" />
+                    }
+                    <div className={cls.name_job}>
+                      <p className={cls.name}>{users?.username}</p>
+                      <p className={cls.job}>{users?.phone_number}</p>
+                    </div>
+                  </div>
+                  {
+                    !AccessToken ?
+
+                    <a href="/auth/login" className={cls.log}>
+                      <AiOutlineLogin id={cls.log_out}/>
+                    </a>:
+
+                    <a href="/auth/login" className={cls.log}>
+                      <BiLogOutCircle onClick={logoutHandler}  id={cls.log_out}/>
+                    </a> 
+                  }
+                </div>
+            </div>
           </div>
         </div>
-      </div>
-    </motion.div>
-    
-  )
+      </>
+    );
 }
 
-
-
-export default Navbar
+export default Navbar;

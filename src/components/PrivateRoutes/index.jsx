@@ -6,7 +6,6 @@ import { Navigate, Outlet } from 'react-router-dom'
 const PrivateRoutes = () => {
 
   const accessToken = localStorage.getItem('accessToken')
-  // const isActive = localStorage.getItem('isActivated')
 
 
 
